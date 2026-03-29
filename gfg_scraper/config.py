@@ -10,8 +10,9 @@ class ScraperConfig:
     start_url: str
     max_depth: int = 2
     max_pages: int = 0  # 0 means no limit
+    workers: int = 3
     output_dir: str = "output"
-    polite_delay: float = 2.0
+    polite_delay: float = 1.0
     request_timeout: float = 30.0
 
 

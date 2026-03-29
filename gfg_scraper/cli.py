@@ -33,14 +33,20 @@ def parse_args(argv: list[str] | None = None) -> ScraperConfig:
     parser.add_argument(
         "--delay",
         type=float,
-        default=2.0,
-        help="Polite delay between requests in seconds (default: 2.0)",
+        default=1.0,
+        help="Polite delay between requests per worker in seconds (default: 1.0)",
     )
     parser.add_argument(
         "--timeout",
         type=float,
         default=30.0,
         help="HTTP request timeout in seconds (default: 30.0)",
+    )
+    parser.add_argument(
+        "--workers",
+        type=int,
+        default=3,
+        help="Number of parallel workers (default: 3)",
     )
 
     args = parser.parse_args(argv)
@@ -49,6 +55,7 @@ def parse_args(argv: list[str] | None = None) -> ScraperConfig:
         start_url=args.url,
         max_depth=args.max_depth,
         max_pages=args.max_pages,
+        workers=args.workers,
         output_dir=args.output_dir,
         polite_delay=args.delay,
         request_timeout=args.timeout,
