@@ -38,6 +38,15 @@ def download_images(article_soup, output_dir: str, file_path: str, config: Scrap
         if not src or src.startswith("data:"):
             continue
 
+        # Clean malformed URLs — some GfG __NEXT_DATA__ content has
+        # attribute text leaked into the src (e.g. url%22%20alt=)
+        if "%22" in src:
+            src = src.split("%22")[0]
+        if '" ' in src:
+            src = src.split('" ')[0]
+        if not src:
+            continue
+
         # Build a unique filename from the URL
         url_hash = hashlib.md5(src.encode()).hexdigest()[:10]
         parsed = urlparse(src)
