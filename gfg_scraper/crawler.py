@@ -117,16 +117,23 @@ def crawl(config):
     url_to_filepath = {url: info["filepath"] for url, info in pages.items()
                        if isinstance(info, dict) and "filepath" in info}
 
-    if already_done:
+    if already_done and start_url in already_done:
+        # Resuming same start URL — rebuild queue from manifest
         print(f"Resuming: {len(already_done)} pages already scraped.")
         queue, visited = _rebuild_queue_from_manifest(manifest, start_url, config)
         print(f"Queue rebuilt: {len(queue)} new pages to process.")
     else:
+        # New start URL or fresh run — just use manifest as visited set
         queue = deque()
         queue.append((start_url, 0, config.output_dir, 1))
-        visited = {start_url}
+        visited = set(already_done)
+        visited.add(start_url)
+        if already_done:
+            print(f"New start URL. {len(already_done)} pages from previous runs will be skipped.")
 
     pages_scraped = len(already_done)
+    new_pages_count = 0
+    new_url_to_filepath: dict[str, str] = {}
     manifest_counter = 0
     num_workers = max(1, config.workers)
 
@@ -158,6 +165,7 @@ def crawl(config):
 
                 ret_url, file_path, child_links = result
                 url_to_filepath[ret_url] = file_path
+                new_url_to_filepath[ret_url] = file_path
                 normalized_children = [normalize_url(c) for c in child_links]
                 manifest["pages"][ret_url] = {
                     "filepath": file_path,
@@ -165,6 +173,7 @@ def crawl(config):
                 }
                 already_done.add(ret_url)
                 pages_scraped += 1
+                new_pages_count += 1
                 manifest_counter += 1
 
                 print(f"[{pages_scraped}] Saved: {file_path} (depth {depth}, queue: {len(queue)}, visited: {len(visited)})")
@@ -183,4 +192,4 @@ def crawl(config):
                     manifest_counter = 0
 
     _save_manifest(config.output_dir, manifest)
-    return CrawlResult(pages_scraped, config.output_dir), url_to_filepath
+    return CrawlResult(pages_scraped, config.output_dir), new_url_to_filepath

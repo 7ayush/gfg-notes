@@ -66,7 +66,9 @@ def main() -> None:
     """Run the GfG Web Scraper: parse args, crawl, rewrite links, print summary."""
     config = parse_args()
     result, url_to_filepath = crawl(config)
-    rewrite_links(url_to_filepath, config.output_dir)
+    if url_to_filepath:
+        print(f"Rewriting links in {len(url_to_filepath)} files...")
+        rewrite_links(url_to_filepath, config.output_dir)
     print(f"Scraping complete! {result.pages_scraped} pages saved to {result.output_dir}")
 
 
