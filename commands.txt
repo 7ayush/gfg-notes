@@ -1,0 +1,22 @@
+# GfG Web Scraper - Commands used to scrape 53,931 articles (6GB)
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Run the scraper (53,931 pages, 106,753 images, depth 17, ~6GB output)
+nohup python3 -m gfg_scraper.cli https://www.geeksforgeeks.org/tutorials/articles-on-computer-science-subjects-gq/ --max-depth 9999 --max-pages 0 --delay 1 --workers 10 --output-dir output > scraper.log 2>&1 &
+
+# Monitor progress
+tail -f scraper.log
+
+# Check status
+grep -c 'Saved:' scraper.log
+find output -name '*.md' | wc -l
+ls output/src/ | wc -l
+du -sh output/
+
+# Resume (if process dies, re-run same command — skips already-scraped pages)
+nohup python3 -m gfg_scraper.cli https://www.geeksforgeeks.org/tutorials/articles-on-computer-science-subjects-gq/ --max-depth 9999 --max-pages 0 --delay 1 --workers 10 --output-dir output > scraper.log 2>&1 &
+
+# Scrape additional starting URL into same output (shares manifest, skips duplicates)
+nohup python3 -m gfg_scraper.cli https://www.geeksforgeeks.org/system-design/software-design-patterns/ --max-depth 9999 --max-pages 0 --delay 1 --workers 10 --output-dir output > scraper.log 2>&1 &
