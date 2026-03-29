@@ -19,7 +19,7 @@ class TestParseArgs:
         config = parse_args(["https://www.geeksforgeeks.org/"])
         assert config.max_depth == 2
         assert config.output_dir == "output"
-        assert config.polite_delay == 2.0
+        assert config.polite_delay == 1.0
         assert config.request_timeout == 30.0
 
     def test_custom_max_depth(self):

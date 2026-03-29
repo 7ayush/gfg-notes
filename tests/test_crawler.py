@@ -90,7 +90,10 @@ def _run_crawl(config, pages, fetch_side_effect=None):
          patch("gfg_scraper.crawler.extract_internal_links", side_effect=mock_extract_links), \
          patch("gfg_scraper.crawler.convert_to_markdown", side_effect=mock_convert), \
          patch("gfg_scraper.crawler.build_file_path", side_effect=mock_build_path), \
-         patch("gfg_scraper.crawler.save_markdown", side_effect=mock_save):
+         patch("gfg_scraper.crawler.save_markdown", side_effect=mock_save), \
+         patch("gfg_scraper.crawler.download_images"), \
+         patch("gfg_scraper.crawler._load_manifest", return_value={"pages": {}}), \
+         patch("gfg_scraper.crawler._save_manifest"):
         result, url_to_filepath = crawl(config)
 
     return result, url_to_filepath, fetch_calls
@@ -232,7 +235,10 @@ def test_extract_failure_continues_crawl(tmp_path):
          patch("gfg_scraper.crawler.extract_internal_links", side_effect=mock_extract_links), \
          patch("gfg_scraper.crawler.convert_to_markdown", side_effect=mock_convert), \
          patch("gfg_scraper.crawler.build_file_path", side_effect=mock_build_path), \
-         patch("gfg_scraper.crawler.save_markdown", side_effect=mock_save):
+         patch("gfg_scraper.crawler.save_markdown", side_effect=mock_save), \
+         patch("gfg_scraper.crawler.download_images"), \
+         patch("gfg_scraper.crawler._load_manifest", return_value={"pages": {}}), \
+         patch("gfg_scraper.crawler._save_manifest"):
         result, url_to_filepath = crawl(config)
 
     # CHILD_A should NOT be saved (extract returned None)

@@ -122,7 +122,10 @@ def test_depth_limiting_prevents_link_following_at_max_depth(data, tmp_path):
          patch("gfg_scraper.crawler.extract_internal_links", side_effect=mock_extract_internal_links), \
          patch("gfg_scraper.crawler.convert_to_markdown", side_effect=mock_convert_to_markdown), \
          patch("gfg_scraper.crawler.build_file_path", side_effect=mock_build_file_path), \
-         patch("gfg_scraper.crawler.save_markdown", side_effect=mock_save_markdown):
+         patch("gfg_scraper.crawler.save_markdown", side_effect=mock_save_markdown), \
+         patch("gfg_scraper.crawler.download_images"), \
+         patch("gfg_scraper.crawler._load_manifest", return_value={"pages": {}}), \
+         patch("gfg_scraper.crawler._save_manifest"):
 
         result, url_to_filepath = crawl(config)
 
@@ -242,7 +245,10 @@ def test_cycle_prevention_fetches_each_url_at_most_once(data, tmp_path):
          patch("gfg_scraper.crawler.extract_internal_links", side_effect=mock_extract_internal_links), \
          patch("gfg_scraper.crawler.convert_to_markdown", side_effect=mock_convert_to_markdown), \
          patch("gfg_scraper.crawler.build_file_path", side_effect=mock_build_file_path), \
-         patch("gfg_scraper.crawler.save_markdown", side_effect=mock_save_markdown):
+         patch("gfg_scraper.crawler.save_markdown", side_effect=mock_save_markdown), \
+         patch("gfg_scraper.crawler.download_images"), \
+         patch("gfg_scraper.crawler._load_manifest", return_value={"pages": {}}), \
+         patch("gfg_scraper.crawler._save_manifest"):
 
         result, url_to_filepath = crawl(config)
 
