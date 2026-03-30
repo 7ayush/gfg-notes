@@ -1,0 +1,132 @@
+# GfG Notes - Current vs Proposed Folder Structure
+# ================================================
+#
+# Current: Everything nested under 01_articles_on_computer_science_subjects_gq/
+# Proposed: Flat topic-based structure with logical groupings
+#
+# Legend:
+#   [INDEPENDENT] = Top-level folder (large enough or distinct enough to stand alone)
+#   [BUCKET]      = Grouping folder that contains related sub-topics
+#   (current)     = Current folder name mapping
+
+# ============================================================
+# PROPOSED STRUCTURE
+# ============================================================
+
+output/
+├── src/                                          # Images (unchanged)
+│
+├── 01_Computer_Science_Foundations/               # [BUCKET]
+│   ├── Computer_Fundamentals/                    # (current: 01_computer_fundamentals_tutorial)
+│   ├── Engineering_Mathematics/                  # (current: 02_engineering_mathematics_tutorials)
+│   └── Mathematics_for_CS/                       # (current: 03_mathematics_for_computer_science)
+│
+├── 02_Systems_and_Architecture/                  # [BUCKET]
+│   ├── Operating_Systems/                        # (current: 04_operating_systems)
+│   ├── Computer_Organization/                    # (current: 05_computer_organization_and_architecture_tutorials)
+│   └── Distributed_Systems/                      # (current: 09_distributed_systems_tutorial)
+│
+├── 03_Networking_and_Security/                   # [BUCKET]
+│   ├── Computer_Networks/                        # (current: 06_computer_network_tutorials)
+│   ├── Cyber_Security/                           # (current: 11_cyber_security_tutorial)
+│   └── Linux/                                    # (current: 10_linux_tutorial)
+│
+├── 04_Theory_and_Compilers/                      # [BUCKET]
+│   ├── Theory_of_Computation/                    # (current: 07_theory_of_computation_automata_tutorials)
+│   └── Compiler_Design/                          # (current: 08_compiler_design_tutorials)
+│
+├── 05_Databases/                                 # [BUCKET]
+│   ├── DBMS/                                     # (current: 12_dbms)
+│   └── Data_Warehousing/                         # (current: 13_data_warehousing_tutorial)
+│
+├── 06_AI_and_Machine_Learning/                   # [BUCKET]
+│   ├── Machine_Learning/                         # (current: 14_machine_learning)
+│   └── Artificial_Intelligence/                  # (current: 15_artificial_intelligence)
+│
+├── 07_Data_Science_and_Analytics/                # [BUCKET]
+│   ├── Data_Analysis/                            # (current: 16_data_analysis_tutorial)
+│   └── Data_Science_with_Python/                 # (current: 17_data_science_with_python_tutorial)
+│
+├── 08_Software_Engineering/                      # [BUCKET]
+│   ├── Software_Engineering/                     # (current: 18_software_engineering)
+│   └── Software_Testing/                         # (current: 19_software_testing_tutorial)
+│
+└── 09_Web_Technology/                            # [INDEPENDENT] (current: 20_web_technology)
+
+
+# ============================================================
+# MOVE MAPPING (old path -> new path)
+# ============================================================
+# All paths relative to output/01_articles_on_computer_science_subjects_gq/
+#
+# 01_computer_fundamentals_tutorial       -> 01_Computer_Science_Foundations/Computer_Fundamentals
+# 02_engineering_mathematics_tutorials    -> 01_Computer_Science_Foundations/Engineering_Mathematics
+# 03_mathematics_for_computer_science     -> 01_Computer_Science_Foundations/Mathematics_for_CS
+# 04_operating_systems                    -> 02_Systems_and_Architecture/Operating_Systems
+# 05_computer_organization_and_arch...    -> 02_Systems_and_Architecture/Computer_Organization
+# 06_computer_network_tutorials           -> 03_Networking_and_Security/Computer_Networks
+# 07_theory_of_computation_automata...    -> 04_Theory_and_Compilers/Theory_of_Computation
+# 08_compiler_design_tutorials            -> 04_Theory_and_Compilers/Compiler_Design
+# 09_distributed_systems_tutorial         -> 02_Systems_and_Architecture/Distributed_Systems
+# 10_linux_tutorial                       -> 03_Networking_and_Security/Linux
+# 11_cyber_security_tutorial              -> 03_Networking_and_Security/Cyber_Security
+# 12_dbms                                 -> 05_Databases/DBMS
+# 13_data_warehousing_tutorial            -> 05_Databases/Data_Warehousing
+# 14_machine_learning                     -> 06_AI_and_Machine_Learning/Machine_Learning
+# 15_artificial_intelligence              -> 06_AI_and_Machine_Learning/Artificial_Intelligence
+# 16_data_analysis_tutorial               -> 07_Data_Science_and_Analytics/Data_Analysis
+# 17_data_science_with_python_tutorial    -> 07_Data_Science_and_Analytics/Data_Science_with_Python
+# 18_software_engineering                 -> 08_Software_Engineering/Software_Engineering
+# 19_software_testing_tutorial            -> 08_Software_Engineering/Software_Testing
+# 20_web_technology                       -> 09_Web_Technology
+
+
+# ============================================================
+# EXECUTION PLAN
+# ============================================================
+#
+# The reorganize.py script handles everything in 3 steps:
+#
+# Step 1: Build path mapping (old absolute path -> new absolute path)
+#   - Maps every file and directory that will move
+#   - This is done BEFORE any moves so we know where everything was
+#
+# Step 2: Move folders
+#   - Moves each top-level topic folder + its .md file into the bucket
+#   - All deeply nested content (depth 2-17) moves WITH its parent
+#   - Internal links within a subtree stay valid (relative paths unchanged)
+#
+# Step 3: Fix cross-references in all .md files
+#   - Scans all 53k+ .md files for markdown links [text](path.md)
+#   - Resolves each relative link to an absolute path
+#   - If that path was moved, computes the new relative path
+#   - Also fixes image paths (../src/ -> adjusted depth)
+#
+# Key insight: Since we move entire subtrees, links WITHIN a subtree
+# (e.g., OS article linking to another OS article) don't need fixing.
+# Only links that CROSS between different top-level topics need updating.
+#
+# Run: python3 reorganize.py
+# 01_Computer_Science_Foundations:    27,295 files (Computer Fundamentals 14k + Eng Math 5k + Math CS 8k)
+# 02_Systems_and_Architecture:        1,099 files (OS 446 + CompOrg 292 + Distributed 361)
+# 03_Networking_and_Security:         3,357 files (Networks 503 + Security 994 + Linux 1860)
+# 04_Theory_and_Compilers:            1,287 files (ToC 638 + Compiler 649)
+# 05_Databases:                       1,250 files (DBMS 922 + Data Warehousing 328)
+# 06_AI_and_Machine_Learning:         1,981 files (ML 996 + AI 985)
+# 07_Data_Science_and_Analytics:      4,761 files (Data Analysis 3641 + DS Python 1120)
+# 08_Software_Engineering:            6,799 files (SE 4553 + Testing 2246)
+# 09_Web_Technology:                  6,081 files
+
+
+# ============================================================
+# FILE COUNTS PER BUCKET
+# ============================================================
+# 01_Computer_Science_Foundations:    27,295 files (Computer Fundamentals 14k + Eng Math 5k + Math CS 8k)
+# 02_Systems_and_Architecture:        1,099 files (OS 446 + CompOrg 292 + Distributed 361)
+# 03_Networking_and_Security:         3,357 files (Networks 503 + Security 994 + Linux 1860)
+# 04_Theory_and_Compilers:            1,287 files (ToC 638 + Compiler 649)
+# 05_Databases:                       1,250 files (DBMS 922 + Data Warehousing 328)
+# 06_AI_and_Machine_Learning:         1,981 files (ML 996 + AI 985)
+# 07_Data_Science_and_Analytics:      4,761 files (Data Analysis 3641 + DS Python 1120)
+# 08_Software_Engineering:            6,799 files (SE 4553 + Testing 2246)
+# 09_Web_Technology:                  6,081 files

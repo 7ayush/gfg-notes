@@ -1,0 +1,95 @@
+# Subfolder Reallocation Plan
+# ===========================
+# These subfolders are currently inside a parent topic but belong elsewhere.
+# Format: current_location -> proposed_new_location
+#
+# NOTE: Only subfolders that are clearly misplaced are listed.
+# Subfolders that are borderline or contextually relevant stay put.
+#
+# After moving, all .md links referencing moved folders must be updated.
+
+# ============================================================
+# FROM: 01_Computer_Science_Foundations/Computer_Fundamentals/
+# ============================================================
+
+# Programming Languages -> NEW BUCKET: 10_Programming_Languages/
+46_c_programming_language                -> 10_Programming_Languages/C
+47_c_plus_plus                           -> 10_Programming_Languages/CPP
+48_csharp_programming_language           -> 10_Programming_Languages/CSharp
+49_java                                  -> 10_Programming_Languages/Java
+50_python_programming_language_tutorial   -> 10_Programming_Languages/Python
+51_javascript_tutorial                   -> 10_Programming_Languages/JavaScript
+52_logic_building_problems               -> 10_Programming_Languages/Logic_Building
+
+# Web/Browser/Server -> 09_Web_Technology/
+12_web_browser                           -> 09_Web_Technology/Web_Technology/Web_Browser
+13_web_server_and_its_type               -> 09_Web_Technology/Web_Technology/Web_Server
+14_web_protocols                         -> 09_Web_Technology/Web_Technology/Web_Protocols
+15_web_security_considerations           -> 03_Networking_and_Security/Cyber_Security/Web_Security
+
+# Office/Productivity Tools -> NEW BUCKET: 11_Productivity_Tools/
+08_windows_10_tutorial                   -> 11_Productivity_Tools/Windows
+10_what_is_macos                         -> 11_Productivity_Tools/macOS
+19_ms_word_tutorial                      -> 11_Productivity_Tools/MS_Word
+20_google_docs_tutorial_for_beginners_to_advance -> 11_Productivity_Tools/Google_Docs
+21_excel_tutorial                        -> 11_Productivity_Tools/Excel
+22_google_sheets_tutorial                -> 11_Productivity_Tools/Google_Sheets
+26_gmail_tutorial                        -> 11_Productivity_Tools/Gmail
+29_dropbox_an_introduction               -> 11_Productivity_Tools/Dropbox
+
+# Networking -> 03_Networking_and_Security/Computer_Networks/
+53_basics_computer_networking            -> 03_Networking_and_Security/Computer_Networks/Basics_Networking
+54_types_of_area_networks_lan_man_and_wan -> 03_Networking_and_Security/Computer_Networks/Area_Networks
+55_types_of_network_topology             -> 03_Networking_and_Security/Computer_Networks/Network_Topology
+18_what_is_wi_fiwireless_fidelity        -> 03_Networking_and_Security/Computer_Networks/WiFi
+61_access_control_in_computer_network    -> 03_Networking_and_Security/Computer_Networks/Access_Control
+
+# Security -> 03_Networking_and_Security/Cyber_Security/
+59_malware_and_its_types                 -> 03_Networking_and_Security/Cyber_Security/Malware
+
+# OS-related -> 02_Systems_and_Architecture/Operating_Systems/
+43_difference_between_application_software_and_operating_system -> KEEP (borderline, small)
+44_difference_between_system_software_and_application_software  -> KEEP (borderline, small)
+
+# ============================================================
+# FROM: 01_Computer_Science_Foundations/Mathematics_for_CS/
+# ============================================================
+
+# DSA -> NEW BUCKET: 10_Programming_Languages/ or standalone
+35_dsa_tutorial_learn_data_structures_and_algorithms -> 10_Programming_Languages/DSA
+
+# Computer Graphics -> KEEP (math-heavy, fits here)
+36_introduction_to_computer_graphics     -> KEEP
+
+# ML -> 06_AI_and_Machine_Learning/Machine_Learning/
+37_ml_machine_learning                   -> 06_AI_and_Machine_Learning/Machine_Learning/ML_Math
+
+# Networking -> 03_Networking_and_Security/Computer_Networks/
+39_network_and_communication             -> 03_Networking_and_Security/Computer_Networks/Network_Communication
+
+# ============================================================
+# FROM: 01_Computer_Science_Foundations/Engineering_Mathematics/
+# ============================================================
+
+# Quiz/GATE -> KEEP (contextually relevant to eng math)
+89_quiz_corner_gq                        -> KEEP
+
+# ============================================================
+# FROM: 07_Data_Science_and_Analytics/Data_Science_with_Python/
+# ============================================================
+
+# Deep Learning -> 06_AI_and_Machine_Learning/
+54_deep_learning_tutorial                -> 06_AI_and_Machine_Learning/Deep_Learning
+
+# ============================================================
+# FROM: 08_Software_Engineering/Software_Engineering/
+# ============================================================
+
+# Software Development (huge, 2976 files) -> standalone or keep
+92_software_development                  -> KEEP (too interlinked to move safely)
+
+# ============================================================
+# SUMMARY OF NEW BUCKETS
+# ============================================================
+# 10_Programming_Languages/  (C, C++, C#, Java, Python, JavaScript, Logic, DSA)
+# 11_Productivity_Tools/     (Windows, macOS, Word, Docs, Excel, Sheets, Gmail, Dropbox)

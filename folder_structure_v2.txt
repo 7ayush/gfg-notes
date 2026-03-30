@@ -1,0 +1,180 @@
+# GfG Notes - Proposed Folder Structure v2
+# =========================================
+# After analyzing all subfolders, here is the optimal reorganization.
+#
+# CURRENT: 9 buckets, but many subfolders are misplaced
+# PROPOSED: 11 buckets with subfolders in their correct homes
+#
+# Rules:
+#   - Only move subfolders that are CLEARLY misplaced
+#   - Small folders (<10 files) that are borderline stay put
+#   - Deep nesting (depth 3-17) moves WITH its parent subfolder
+#   - After moves, all .md links must be updated
+
+# ============================================================
+# PROPOSED FINAL STRUCTURE
+# ============================================================
+
+output/
+├── src/                                    # Images (unchanged)
+│
+├── 01_CS_Foundations/
+│   ├── Computer_Fundamentals/              # Hardware, memory, I/O, shortcuts, comparisons
+│   ├── Engineering_Mathematics/            # Logic, sets, relations, graphs, probability, calculus
+│   └── Mathematics_for_CS/                 # Number systems, algebra, statistics, probability
+│
+├── 02_Systems_and_Architecture/
+│   ├── Operating_Systems/
+│   ├── Computer_Organization/
+│   └── Distributed_Systems/
+│
+├── 03_Networking_and_Security/
+│   ├── Computer_Networks/
+│   ├── Cyber_Security/
+│   └── Linux/
+│
+├── 04_Theory_and_Compilers/
+│   ├── Theory_of_Computation/
+│   └── Compiler_Design/
+│
+├── 05_Databases/
+│   ├── DBMS/
+│   └── Data_Warehousing/
+│
+├── 06_AI_and_ML/
+│   ├── Artificial_Intelligence/
+│   ├── Machine_Learning/
+│   └── Deep_Learning/                      # MOVED from Data_Science_with_Python/54_deep_learning_tutorial
+│
+├── 07_Data_Science_and_Analytics/
+│   ├── Data_Analysis/
+│   └── Data_Science_with_Python/
+│
+├── 08_Software_Engineering/
+│   ├── Software_Engineering/
+│   └── Software_Testing/
+│
+├── 09_Web_Technology/                      # HTML, CSS, Node.js, PHP, Ruby, Go, PostgreSQL, MongoDB
+│
+├── 10_Programming_Languages/               # NEW BUCKET
+│   ├── C/
+│   ├── CPP/
+│   ├── CSharp/
+│   ├── Java/
+│   ├── Python/
+│   ├── JavaScript/
+│   ├── DSA/                                # MOVED from Mathematics_for_CS/35_dsa_tutorial
+│   └── Logic_Building/
+│
+├── 11_Productivity_Tools/                  # NEW BUCKET
+│   ├── Windows/
+│   ├── macOS/
+│   ├── MS_Word/
+│   ├── Google_Docs/
+│   ├── Excel/
+│   ├── Google_Sheets/
+│   ├── Gmail/
+│   └── Dropbox/
+│
+└── 12_Computer_Graphics/                   # NEW BUCKET (standalone, 492 files)
+
+
+# ============================================================
+# MOVE OPERATIONS
+# ============================================================
+# Format: source_path -> destination_path
+# All paths relative to output/
+
+# --- FROM 01_CS_Foundations/Computer_Fundamentals/ ---
+
+# Programming Languages (8,852 files total) -> 10_Programming_Languages/
+01_CS_Foundations/Computer_Fundamentals/46_c_programming_language                -> 10_Programming_Languages/C
+01_CS_Foundations/Computer_Fundamentals/47_c_plus_plus                           -> 10_Programming_Languages/CPP
+01_CS_Foundations/Computer_Fundamentals/48_csharp_programming_language           -> 10_Programming_Languages/CSharp
+01_CS_Foundations/Computer_Fundamentals/49_java                                  -> 10_Programming_Languages/Java
+01_CS_Foundations/Computer_Fundamentals/50_python_programming_language_tutorial   -> 10_Programming_Languages/Python
+01_CS_Foundations/Computer_Fundamentals/51_javascript_tutorial                   -> 10_Programming_Languages/JavaScript
+01_CS_Foundations/Computer_Fundamentals/52_logic_building_problems               -> 10_Programming_Languages/Logic_Building
+
+# Web topics (1,234 files) -> 09_Web_Technology/Web_Technology/
+01_CS_Foundations/Computer_Fundamentals/12_web_browser                           -> 09_Web_Technology/Web_Technology/Web_Browser
+01_CS_Foundations/Computer_Fundamentals/13_web_server_and_its_type               -> 09_Web_Technology/Web_Technology/Web_Server
+01_CS_Foundations/Computer_Fundamentals/14_web_protocols                         -> 09_Web_Technology/Web_Technology/Web_Protocols
+
+# Web Security (644 files) -> 03_Networking_and_Security/Cyber_Security/
+01_CS_Foundations/Computer_Fundamentals/15_web_security_considerations           -> 03_Networking_and_Security/Cyber_Security/Web_Security
+
+# Productivity Tools (2,163 files) -> 11_Productivity_Tools/
+01_CS_Foundations/Computer_Fundamentals/08_windows_10_tutorial                                   -> 11_Productivity_Tools/Windows
+01_CS_Foundations/Computer_Fundamentals/10_what_is_macos                                         -> 11_Productivity_Tools/macOS
+01_CS_Foundations/Computer_Fundamentals/19_ms_word_tutorial                                      -> 11_Productivity_Tools/MS_Word
+01_CS_Foundations/Computer_Fundamentals/20_google_docs_tutorial_for_beginners_to_advance         -> 11_Productivity_Tools/Google_Docs
+01_CS_Foundations/Computer_Fundamentals/21_excel_tutorial                                        -> 11_Productivity_Tools/Excel
+01_CS_Foundations/Computer_Fundamentals/22_google_sheets_tutorial                                -> 11_Productivity_Tools/Google_Sheets
+01_CS_Foundations/Computer_Fundamentals/26_gmail_tutorial                                        -> 11_Productivity_Tools/Gmail
+01_CS_Foundations/Computer_Fundamentals/29_dropbox_an_introduction                               -> 11_Productivity_Tools/Dropbox
+
+# Networking topics (18 files) -> 03_Networking_and_Security/Computer_Networks/
+01_CS_Foundations/Computer_Fundamentals/53_basics_computer_networking            -> 03_Networking_and_Security/Computer_Networks/Basics_Networking
+01_CS_Foundations/Computer_Fundamentals/54_types_of_area_networks_lan_man_and_wan -> 03_Networking_and_Security/Computer_Networks/Area_Networks
+01_CS_Foundations/Computer_Fundamentals/55_types_of_network_topology             -> 03_Networking_and_Security/Computer_Networks/Network_Topology
+01_CS_Foundations/Computer_Fundamentals/18_what_is_wi_fiwireless_fidelity        -> 03_Networking_and_Security/Computer_Networks/WiFi
+01_CS_Foundations/Computer_Fundamentals/61_access_control_in_computer_network    -> 03_Networking_and_Security/Computer_Networks/Access_Control
+
+# Security (6 files) -> 03_Networking_and_Security/Cyber_Security/
+01_CS_Foundations/Computer_Fundamentals/59_malware_and_its_types                 -> 03_Networking_and_Security/Cyber_Security/Malware
+
+# --- FROM 01_CS_Foundations/Mathematics_for_CS/ ---
+
+# DSA (2,582 files) -> 10_Programming_Languages/
+01_CS_Foundations/Mathematics_for_CS/35_dsa_tutorial_learn_data_structures_and_algorithms -> 10_Programming_Languages/DSA
+
+# Computer Graphics (492 files) -> 12_Computer_Graphics/ (standalone)
+01_CS_Foundations/Mathematics_for_CS/36_introduction_to_computer_graphics        -> 12_Computer_Graphics
+
+# ML subset (83 files) -> 06_AI_and_ML/Machine_Learning/
+01_CS_Foundations/Mathematics_for_CS/37_ml_machine_learning                      -> 06_AI_and_ML/Machine_Learning/ML_Math_Foundations
+
+# Networking (35 files) -> 03_Networking_and_Security/Computer_Networks/
+01_CS_Foundations/Mathematics_for_CS/39_network_and_communication                -> 03_Networking_and_Security/Computer_Networks/Network_Communication
+
+# --- FROM 07_Data_Science_and_Analytics/Data_Science_with_Python/ ---
+
+# Deep Learning (583 files) -> 06_AI_and_ML/
+07_Data_Science_and_Analytics/Data_Science_with_Python/54_deep_learning_tutorial -> 06_AI_and_ML/Deep_Learning
+
+
+# ============================================================
+# WHAT STAYS PUT (intentionally not moved)
+# ============================================================
+#
+# Computer_Fundamentals/ keeps:
+#   - Hardware, memory, I/O devices, shortcuts, comparisons (core CS fundamentals)
+#   - 30_computer_shortcut_keys, 31_function_keys, 34_ram_vs_rom, etc.
+#   - 43/44_difference_between_software (borderline but small, 224+230 files)
+#   - 45_barcode_vs_qr_code (7 files, too small to bother)
+#
+# Engineering_Mathematics/ keeps:
+#   - 89_quiz_corner_gq (802 files, contextually relevant to eng math/GATE)
+#
+# Software_Engineering/ keeps:
+#   - 92_software_development (2,976 files, too interlinked to move safely)
+#
+# Data_Warehousing/ keeps:
+#   - 41_feature_selection, 42_feature_extraction (borderline ML but contextual to DW)
+
+
+# ============================================================
+# FILE COUNT IMPACT
+# ============================================================
+#
+# Moves out of Computer_Fundamentals:  ~12,917 files (from 14,052 -> ~1,135)
+# Moves out of Mathematics_for_CS:     ~3,192 files (from 8,434 -> ~5,242)
+# Moves out of Data_Science_with_Python: ~583 files (from 1,120 -> ~537)
+#
+# New buckets:
+#   10_Programming_Languages:  ~11,434 files (C+CPP+C#+Java+Python+JS+Logic+DSA)
+#   11_Productivity_Tools:     ~2,163 files (Windows+macOS+Word+Docs+Excel+Sheets+Gmail+Dropbox)
+#   12_Computer_Graphics:        ~492 files
+#
+# Total files moved: ~16,692 (31% of all files get a better home)

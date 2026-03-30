@@ -1,0 +1,77 @@
+# Subfolder Reallocation v3
+# =========================
+# Remaining misplacements found after v2 reorganization.
+# Only moving clearly misplaced subfolders with significant file counts.
+
+# ============================================================
+# MOVES
+# ============================================================
+
+# --- FROM 10_Programming_Languages/JavaScript/ ---
+# Frontend frameworks belong in Web_Technology
+132_react                                -> 09_Web_Technology/Web_Technology/React
+134_lodash                               -> 09_Web_Technology/Web_Technology/Lodash
+142_vue_js                               -> 09_Web_Technology/Web_Technology/Vue
+143_angular_tutorial                     -> 09_Web_Technology/Web_Technology/Angular
+144_nextjs_tutorial                      -> 09_Web_Technology/Web_Technology/NextJS
+145_nuxtjs                               -> 09_Web_Technology/Web_Technology/NuxtJS
+
+# --- FROM 10_Programming_Languages/Python/ ---
+# Web frameworks belong in Web_Technology
+70_python_introduction_to_web_development_using_flask -> 09_Web_Technology/Web_Technology/Flask_Intro
+71_python_web_development_django         -> 09_Web_Technology/Web_Technology/Django
+79_python_web_development                -> 09_Web_Technology/Web_Technology/Python_Web_Dev
+89_flask_tutorial                        -> 09_Web_Technology/Web_Technology/Flask
+90_django_tutorial                       -> 09_Web_Technology/Web_Technology/Django_Tutorial
+
+# Data science libs belong in Data_Science
+83_pandas_tutorial                       -> 07_Data_Science_and_Analytics/Data_Science_with_Python/Pandas_Tutorial
+84_matplotlib_tutorial                   -> 07_Data_Science_and_Analytics/Data_Science_with_Python/Matplotlib_Tutorial
+85_python_seaborn_tutorial               -> 07_Data_Science_and_Analytics/Data_Science_with_Python/Seaborn_Tutorial
+86_scikit_learn_tutorial                 -> 06_AI_and_Machine_Learning/Machine_Learning/Scikit_Learn_Tutorial
+
+# ML/DL libs belong in AI_and_ML
+87_lightgbm_light_gradient_boosting_machine -> 06_AI_and_Machine_Learning/Machine_Learning/LightGBM
+88_keras_tutorial                        -> 06_AI_and_Machine_Learning/Deep_Learning/Keras_Tutorial
+67_introduction_to_tensorflow            -> 06_AI_and_Machine_Learning/Deep_Learning/TensorFlow_Intro
+68_what_is_keras                         -> 06_AI_and_Machine_Learning/Deep_Learning/Keras_Intro
+69_getting_started_with_pytorch          -> 06_AI_and_Machine_Learning/Deep_Learning/PyTorch_Intro
+
+# MongoDB belongs in Databases
+82_python_mongodb_tutorial               -> 05_Databases/DBMS/Python_MongoDB
+
+# --- FROM 10_Programming_Languages/Java/ ---
+# Advanced Java (374 files, mostly Spring/web/enterprise) -> Software_Engineering
+170_advanced_java_interview_questions    -> 08_Software_Engineering/Software_Engineering/Advanced_Java_Interview
+
+# --- FROM 11_Productivity_Tools/Dropbox/ ---
+# Android tutorial (732 files!) is completely misplaced
+01_android_tutorial                      -> 10_Programming_Languages/Android
+
+# --- FROM 08_Software_Engineering/Software_Testing/ ---
+# DevOps tools -> could be standalone but contextually fine in testing
+# Jenkins, Jira, Selenium, Cypress, Postman -> KEEP (testing tools)
+
+# --- FROM 03_Networking_and_Security/Linux/ ---
+# DevOps/Cloud content (138 files)
+103_role_of_linux_in_cloud_computing_and_devops -> KEEP (contextually relevant to Linux)
+109_career_jobs_in_linux                 -> KEEP (career guidance, fine here)
+
+# --- FROM 06_AI_and_Machine_Learning/Deep_Learning/ ---
+# Huge AI/ML tutorial (426 files) that's a duplicate/overview
+51_ai_ml_and_data_science_tutorial_learn_ai_ml_and_data_science -> KEEP (overview, fine here)
+
+# ============================================================
+# SUMMARY
+# ============================================================
+# Total moves: 23 subfolders
+# ~3,200 files relocated
+#
+# Key changes:
+# - JS frameworks (React, Vue, Angular, Next.js) -> Web_Technology
+# - Python web frameworks (Django, Flask) -> Web_Technology
+# - Python data science libs (Pandas, Matplotlib, Seaborn) -> Data_Science
+# - ML/DL libs (Keras, TensorFlow, PyTorch, LightGBM, Scikit-learn) -> AI_and_ML
+# - Android tutorial (misplaced in Dropbox!) -> Programming_Languages
+# - Python MongoDB -> Databases
+# - Advanced Java interviews -> Software_Engineering
